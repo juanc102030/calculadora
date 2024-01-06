@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Préstamo</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0A1F4A;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    #calculator, #results {
+      width: 87%;
+      max-width: 400px;
+      margin: 34px auto;
+      background-color: #1E3851;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      position: relative;
+      border-bottom: 2px solid #FBBC2F;
+    }
+
+    #logo {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      border-radius: 50%;
+      position: relative;
+      left: 0;
+      top: 26px;
+      transform: translateY(-50%);
+    }
+
+    h1, label {
+      font-family: 'Aileron', sans-serif;
+      color: #F8B63E;
+      font-weight: bold;
+      text-align: left;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 32px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: calc(100% - 16px);
+      padding: 12px;
+      box-sizing: border-box;
+      margin: 8px 0;
+      border: 1px solid #F8B63E;
+      border-radius: 5px;
+      background-color: #1E3851;
+      color: #fff;
+      font-size: 16px;
+      text-align: left;
+      transition: background-color 0.5s ease-out;
+    }
+    #capital 
+    {
+      font-size: 23px;
+     }
+#results #intereses {
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  font-size: 23px;
+  animation: increaseSize 3s;
+}
+
+@keyframes increaseSize {
+  0%, 20%, 50%, 80%, 100% {
+    left: 0;
+    font-size: 38px;
+  }
+  40%, 60% {
+    left: 10px; /* Ajusta según sea necesario */
+    font-size: 22px; /* Ajusta según sea necesario */
+  }
+}
+    
+    
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #F8B63E;
+      color: #0A1F4C;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.5s ease-out;
+    }
+
+    #results {
+      display: none;
+    }
+
+    #results label {
+      color: #F8B63E;
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+      text-align: left;
+      font-size: 18px;
+    }
+    #results h1 {
+  font-size: 22px;
+}
+    #results #title {
+  font-size: 28px;
+}
+    #blinkingTitle {
+  font-size: 28px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+    #recalculate {
+      width: 100%;
+      padding: 12px;
+      background-color: #F8B63E;
+      color: #0A1F4C;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.5s ease-out;
+    }
+
+    input.highlight {
+      animation: highlight 0.5s ease-out;
+    }
+
+    @keyframes highlight {
+      0%, 100% {
+        background-color: #1E3851;
+      }
+      50% {
+        background-color: #FBBC2F;
+      }
+      
+    }
+     #results #contactarAsesor {
+      width: 100%;
+      padding: 12px;
+      background-color: #F8B63E;
+      color: #0A1F4C;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.5s ease-out;
+    }
+    #socialMediaIcons img {
+      width: 60px; /* Ajusta según sea necesario */
+      height: 60px; /* Ajusta según sea necesario */
+      margin-right: 10px;
+      margin-bottom:30px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease-out;
+    }
+
+    #socialMediaIcons img:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+<div id="calculator">
+  <div id="header">
+    <img id="logo" src="https://github.com/juanc102030/imagenes/blob/main/LOGO.jpg?raw=true" alt="Logo">
+    <h1>Calculadora de Préstamo</h1>
+  </div>
+
+  <label for="cuotasPagadas">Cuotas Pagadas:</label>
+  <input type="text" id="cuotasPagadas" placeholder="Ingrese cuotas pagadas" oninput="formatCurrency(this)" class="highlight">
+
+  <label for="cuota">Cuota (en pesos):</label>
+  <input type="text" id="cuota" placeholder="Ingrese cuota en pesos" oninput="formatCurrency(this)" class="highlight">
+
+  <label for="valorPrestamo">Valor del Préstamo (en pesos):</label>
+  <input type="text" id="valorPrestamo" placeholder="Ingrese valor del préstamo" oninput="formatCurrency(this)" class="highlight">
+
+  <label for="saldoActual">Saldo Actual (en pesos):</label>
+  <input type="text" id="saldoActual" placeholder="Ingrese saldo actual" oninput="formatCurrency(this)" class="highlight">
+
+  <button onclick="calcular()">Calcular</button>
+</div>
+
+<div id="results">
+  <div id="header">
+    <img id="logo" src="https://github.com/juanc102030/imagenes/blob/main/LOGO.jpg?raw=true" alt="Logo">
+    <h1>Así has pagado tu crédito</h1>
+  </div>
+ <button id="recalculate" onclick="resetForm()">Volver a Calcular</button>
+
+  <label for="capital">Has pagado a capital:</label>
+  <input type="text" id="capital" readonly>
+
+  <label for="intereses">Has pagado en intereses:</label>
+  <input type="text" id="intereses" readonly>
+<button id="contactarAsesor" onclick="window.location.href='https://wa.link/7j8hwq'">Contactarme con un asesor</button>
+ 
+
+</div>
+   <p id="copyrightText">© 2024 Servicios Bancarios. Todos los derechos reservados.</p>
+  <div id="socialMediaIcons">
+    <a href="https://acortar.link/pJyaA0" target="_blank"><img src="https://github.com/juanc102030/imagenes/blob/main/instagram.png?raw=true" alt="Instagram"></a>
+    <a href="https://acortar.link/06zTTm" target="_blank"><img src="https://github.com/juanc102030/imagenes/blob/main/facebook.png?raw=true" alt="Facebook"></a>
+  </div>
+</div>
+
+<script>
+  setTimeout(() => {
+    document.getElementById('cuotasPagadas').classList.add('highlight');
+  }, 3000);
+
+  function formatCurrency(input) {
+    let value = input.value.replace(/[^0-9]/g, '');
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    input.value = (input.id === 'cuotasPagadas') ? value : '$' + value;
+  }
+
+  function calcular() {
+    const inputs = document.querySelectorAll('input.highlight');
+    let todosLlenos = true;
+    inputs.forEach(input => {
+      if (input.value.trim() === '') {
+        todosLlenos = false;
+        input.classList.add('highlight');
+      }
+    });
+
+    if (todosLlenos) {
+      const cuotasPagadas = parseInt(document.getElementById('cuotasPagadas').value.replace(/[^0-9]/g, '')) || 0;
+      const cuota = parseInt(document.getElementById('cuota').value.replace(/[^0-9]/g, '')) || 0;
+      const valorPrestamo = parseInt(document.getElementById('valorPrestamo').value.replace(/[^0-9]/g, '')) || 0;
+      const saldoActual = parseInt(document.getElementById('saldoActual').value.replace(/[^0-9]/g, '')) || 0;
+
+      const capitalPagado = valorPrestamo - saldoActual;
+      const interesesPagados = cuotasPagadas * cuota - capitalPagado;
+
+      document.getElementById('capital').value = '$' + capitalPagado.toLocaleString('es-CO');
+      document.getElementById('intereses').value = '$' + interesesPagados.toLocaleString('es-CO');
+
+      document.getElementById('calculator').style.display = 'none';
+      document.getElementById('results').style.display = 'block';
+    }
+  }
+
+  function resetForm() {
+    document.getElementById('calculator').style.display = 'block';
+    document.getElementById('results').style.display = 'none';
+
+    document.getElementById('cuotasPagadas').value = '';
+    document.getElementById('cuota').value = '';
+    document.getElementById('valorPrestamo').value = '';
+    document.getElementById('saldoActual').value = '';
+
+    document.getElementById('capital').value = '';
+    document.getElementById('intereses').value = '';
+  }
+</script>
+
+</body>
+</html>
